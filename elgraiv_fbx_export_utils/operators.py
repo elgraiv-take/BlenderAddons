@@ -16,17 +16,18 @@ class FbxToolsExportOp(bpy.types.Operator):
         current=context.scene.export_set.export_set_list[context.scene.export_set.active_index]
         if len(current.save_path)<=0:
             return {'FINISHED'}
-        layers=[b for b in context.scene.layers]
-        for i in range(len(layers)):
-            context.scene.layers[i]=True
+        layerCollection=context.window.view_layer.layer_collection
+        layers=[ (layer.name,layer.exclude) for layer in layerCollection.children]
+        for layer in layers:
+            layerCollection.children[layer[0]].exclude=False
         bpy.ops.object.select_all(action='DESELECT')
         for n in current.object_list:
             o=context.scene.objects[n.name]
-            o.select=True
-        bpy.ops.export_scene.fbx(filepath=current.save_path, check_existing=True, filter_glob="*.fbx", version='BIN7400', use_selection=True,apply_scale_options="FBX_SCALE_ALL", object_types={'EMPTY', 'ARMATURE', 'MESH'})
+            o.select_set(True)
+        bpy.ops.export_scene.fbx(filepath=current.save_path, check_existing=True, filter_glob="*.fbx", use_selection=True,apply_scale_options="FBX_SCALE_ALL", object_types={'EMPTY', 'ARMATURE', 'MESH'})
 
-        for i in range(len(layers)):
-            context.scene.layers[i]=layers[i]
+        for layer in layers:
+            layerCollection.children[layer[0]].exclude=layer[1]
         return {'FINISHED'}
 
 class FbxToolsExportSetAddOp(bpy.types.Operator):
