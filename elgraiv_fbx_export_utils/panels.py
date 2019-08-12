@@ -60,7 +60,10 @@ class FBXTOOL_PT_fbx_exporter(ToolsPanel,bpy.types.Panel):
             row = layout.row()
             row.prop(current,"name",text="Name")
             row = layout.row()
-            row.prop(current,"save_path",text="Path")
+            sub=row.column()
+            sub.prop(current,"save_path",text="Path")
+            sub=row.column(align=True)
+            sub.operator("export_scene.choose_fbx_path",icon="FILEBROWSER",text="")
             row = layout.row()
             row.template_list("FBXTOOL_UL_export_item", "", current, "object_list",current,"active_object_index")
 

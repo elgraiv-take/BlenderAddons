@@ -24,6 +24,7 @@ classes=[
     operators.FbxToolsExportOp,
     operators.FbxToolsExportSetAddOp,
     operators.FbxToolsExportSetRemoveOp,
+    operators.FbxToolsExportSetChoosePathOp,
 
     panels.FBXTOOL_UL_export_set,
     panels.FBXTOOL_UL_export_item,

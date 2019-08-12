@@ -6,6 +6,7 @@ Created on 2019/08/11
 
 
 import bpy
+import bpy_extras
 
 class FbxToolsExportOp(bpy.types.Operator):
     """Tooltip"""
@@ -52,4 +53,15 @@ class FbxToolsExportSetRemoveOp(bpy.types.Operator):
         setList=context.scene.export_set
         delIndex=setList.active_index
         setList.export_set_list.remove(delIndex)
+        return {'FINISHED'}
+
+class FbxToolsExportSetChoosePathOp(bpy.types.Operator,bpy_extras.io_utils.ExportHelper):
+    bl_idname = "export_scene.choose_fbx_path"
+    bl_label = "Choose Export Path"
+    filename_ext=".fbx"
+#    filter_glob = bpy.props.StringProperty( default='*.fbx', options={'HIDDEN'} )
+    def execute(self, context):
+        sets=context.scene.export_set
+        activeIndex=sets.active_index
+        sets.export_set_list[activeIndex].save_path=self.filepath
         return {'FINISHED'}
