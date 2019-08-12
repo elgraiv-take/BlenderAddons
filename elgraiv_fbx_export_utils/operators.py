@@ -59,7 +59,6 @@ class FbxToolsExportSetChoosePathOp(bpy.types.Operator,bpy_extras.io_utils.Expor
     bl_idname = "export_scene.choose_fbx_path"
     bl_label = "Choose Export Path"
     filename_ext=".fbx"
-#    filter_glob = bpy.props.StringProperty( default='*.fbx', options={'HIDDEN'} )
     def execute(self, context):
         sets=context.scene.export_set
         activeIndex=sets.active_index
