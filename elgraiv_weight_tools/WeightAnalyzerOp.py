@@ -42,5 +42,5 @@ class RemoveSmallWeightsOp(bpy.types.Operator):
         obj=context.active_object
         if obj.type!='MESH':
             return{'FINISHED'}
-        elgraiv_weight_tools.WeightAnalyzer.RemoveSmallWeghit(obj, 0.01)
+        elgraiv_weight_tools.WeightAnalyzer.RemoveSmallWeghit(obj, 0.05)
         return {'FINISHED'}

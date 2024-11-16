@@ -14,7 +14,7 @@ def AddVertexGroupForSelectedBones(objects,bones):
         for bone in bones:
             boneName=bone.name
             if obj.vertex_groups.get(boneName,None)==None:
-                obj.vertex_groups.new(boneName)
+                obj.vertex_groups.new(name=boneName)
 
 
 def RemoveVertexGroupUnselectedBones(objects,bones):
